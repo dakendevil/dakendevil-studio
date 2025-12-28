@@ -1,0 +1,123 @@
+import { useState } from "react";
+
+type Category = "all" | "logo" | "apparel" | "mockup" | "poster" | "banner";
+
+interface Project {
+  id: number;
+  title: string;
+  category: Category;
+  year: string;
+  image: string;
+  size: "large" | "medium" | "small";
+}
+
+const projects: Project[] = [
+  { id: 1, title: "Noir Identity", category: "logo", year: "2024", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80", size: "large" },
+  { id: 2, title: "Urban Collection", category: "apparel", year: "2024", image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80", size: "medium" },
+  { id: 3, title: "Minimal Brand", category: "logo", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80", size: "small" },
+  { id: 4, title: "Festival Poster", category: "poster", year: "2024", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80", size: "medium" },
+  { id: 5, title: "Product Showcase", category: "mockup", year: "2024", image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80", size: "large" },
+  { id: 6, title: "Event Banner", category: "banner", year: "2023", image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80", size: "small" },
+];
+
+const categories: { value: Category; label: string }[] = [
+  { value: "all", label: "All Works" },
+  { value: "logo", label: "Logo Design" },
+  { value: "apparel", label: "Apparel" },
+  { value: "mockup", label: "Mockups" },
+  { value: "poster", label: "Posters" },
+  { value: "banner", label: "Banners" },
+];
+
+const Portfolio = () => {
+  const [activeFilter, setActiveFilter] = useState<Category>("all");
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+  const filteredProjects = activeFilter === "all" 
+    ? projects 
+    : projects.filter(p => p.category === activeFilter);
+
+  return (
+    <section id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background">
+      {/* Section Header */}
+      <div className="max-w-7xl mx-auto mb-16">
+        <h2 className="display-lg text-foreground mb-8">Selected Works</h2>
+        
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4">
+          {categories.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setActiveFilter(cat.value)}
+              className={`px-4 py-2 text-xs tracking-[0.2em] uppercase font-body transition-all duration-300 border ${
+                activeFilter === cat.value
+                  ? "border-primary text-primary bg-primary/5"
+                  : "border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Grid */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredProjects.map((project, index) => (
+          <div
+            key={project.id}
+            className={`relative overflow-hidden cursor-pointer group ${
+              project.size === "large" ? "md:col-span-2 md:row-span-2" : ""
+            } ${project.size === "medium" ? "md:row-span-2" : ""}`}
+            style={{ 
+              animationDelay: `${index * 100}ms`,
+              minHeight: project.size === "large" ? "500px" : project.size === "medium" ? "400px" : "250px"
+            }}
+            onMouseEnter={() => setHoveredId(project.id)}
+            onMouseLeave={() => setHoveredId(null)}
+          >
+            {/* Image */}
+            <div className="absolute inset-0">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+              />
+            </div>
+
+            {/* Overlay */}
+            <div className={`absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent transition-opacity duration-500 ${
+              hoveredId === project.id ? "opacity-90" : "opacity-0"
+            }`} />
+
+            {/* Crimson Accent Line */}
+            <div className={`absolute bottom-0 left-0 h-1 bg-primary transition-all duration-500 ease-out-expo ${
+              hoveredId === project.id ? "w-full" : "w-0"
+            }`} />
+
+            {/* Content */}
+            <div className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-500 ${
+              hoveredId === project.id ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}>
+              <p className="text-[10px] tracking-[0.3em] text-primary uppercase mb-2 font-body">
+                {project.category} — {project.year}
+              </p>
+              <h3 className="display-md text-foreground">{project.title}</h3>
+            </div>
+
+            {/* View Indicator */}
+            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+              hoveredId === project.id ? "opacity-100 scale-100" : "opacity-0 scale-90"
+            }`}>
+              <span className="text-xs tracking-[0.3em] text-foreground uppercase font-body px-6 py-3 border border-foreground/30 backdrop-blur-sm">
+                View
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Portfolio;
