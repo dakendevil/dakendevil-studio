@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import emailjs from "@emailjs/browser";
 import { Instagram, MessageCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,10 +10,15 @@ import { toast } from "@/hooks/use-toast";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const EMAILJS_SERVICE_ID = "service_ysq7ana";
+const EMAILJS_TEMPLATE_ID = "template_nmo8x3g";
+const EMAILJS_PUBLIC_KEY = "57CN0X506N1rw6RNL";
+
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState({
     name: "",
@@ -56,13 +62,36 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message sent",
-      description: "We'll get back to you within 24 hours.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      toast({
+        title: "Message sent",
+        description: "We'll get back to you within 24 hours.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socials = [
@@ -134,9 +163,10 @@ const Contact = () => {
             </div>
             <Button
               type="submit"
-              className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-display text-lg tracking-[0.2em] transition-all duration-300 hover:tracking-[0.3em]"
+              disabled={isSubmitting}
+              className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-display text-lg tracking-[0.2em] transition-all duration-300 hover:tracking-[0.3em] disabled:opacity-50"
             >
-              LET'S WORK
+              {isSubmitting ? "SENDING..." : "LET'S WORK"}
             </Button>
           </form>
         </div>
