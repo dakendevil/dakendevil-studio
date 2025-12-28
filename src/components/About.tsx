@@ -1,13 +1,62 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Text animation
+      gsap.fromTo(
+        textRef.current,
+        { opacity: 0, x: -60 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+          },
+        }
+      );
+
+      // Visual element animation
+      gsap.fromTo(
+        visualRef.current,
+        { opacity: 0, scale: 0.8, rotate: -5 },
+        {
+          opacity: 1,
+          scale: 1,
+          rotate: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="about" className="py-32 px-6 md:px-12 lg:px-24 bg-background relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-32 px-6 md:px-12 lg:px-24 bg-background relative overflow-hidden">
       {/* Background Element */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[400px] h-[600px] bg-gradient-to-l from-primary/5 to-transparent" />
       
       <div className="max-w-7xl mx-auto relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
-          <div>
+          <div ref={textRef}>
             <h2 className="display-lg text-foreground mb-8">About</h2>
             <div className="w-16 h-px bg-primary mb-8" />
             <p className="text-xl md:text-2xl text-muted-foreground font-body font-light leading-relaxed">
@@ -21,7 +70,7 @@ const About = () => {
           </div>
 
           {/* Visual Element */}
-          <div className="relative">
+          <div ref={visualRef} className="relative">
             <div className="aspect-square relative">
               {/* Decorative Frame */}
               <div className="absolute inset-8 border border-border" />

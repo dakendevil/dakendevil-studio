@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Category = "all" | "logo" | "apparel" | "mockup" | "poster" | "banner";
 
@@ -32,15 +36,67 @@ const categories: { value: Category; label: string }[] = [
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState<Category>("all");
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const filteredProjects = activeFilter === "all" 
     ? projects 
     : projects.filter(p => p.category === activeFilter);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Header animation
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+          },
+        }
+      );
+
+      // Grid items stagger animation
+      gsap.fromTo(
+        ".portfolio-item",
+        { opacity: 0, y: 60, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 75%",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Animate filter change
+  useEffect(() => {
+    gsap.fromTo(
+      ".portfolio-item",
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" }
+    );
+  }, [activeFilter]);
+
   return (
-    <section id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background">
+    <section ref={sectionRef} id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background">
       {/* Section Header */}
-      <div className="max-w-7xl mx-auto mb-16">
+      <div ref={headerRef} className="max-w-7xl mx-auto mb-16">
         <h2 className="display-lg text-foreground mb-8">Selected Works</h2>
         
         {/* Filters */}
@@ -62,15 +118,14 @@ const Portfolio = () => {
       </div>
 
       {/* Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredProjects.map((project, index) => (
+      <div ref={gridRef} className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredProjects.map((project) => (
           <div
             key={project.id}
-            className={`relative overflow-hidden cursor-pointer group ${
+            className={`portfolio-item relative overflow-hidden cursor-pointer group ${
               project.size === "large" ? "md:col-span-2 md:row-span-2" : ""
             } ${project.size === "medium" ? "md:row-span-2" : ""}`}
             style={{ 
-              animationDelay: `${index * 100}ms`,
               minHeight: project.size === "large" ? "500px" : project.size === "medium" ? "400px" : "250px"
             }}
             onMouseEnter={() => setHoveredId(project.id)}

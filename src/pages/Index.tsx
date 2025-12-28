@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Helmet } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
@@ -7,7 +10,28 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Index = () => {
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Smooth scroll behavior
+    const sections = gsap.utils.toArray<HTMLElement>("section");
+    
+    sections.forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top center",
+        end: "bottom center",
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -25,7 +49,7 @@ const Index = () => {
 
       <Navigation />
       
-      <main>
+      <main ref={mainRef}>
         <Hero />
         <Portfolio />
         <Services />
