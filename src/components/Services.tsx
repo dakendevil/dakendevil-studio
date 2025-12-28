@@ -1,4 +1,9 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Palette, Shirt, Box, FileImage } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -24,22 +29,66 @@ const services = [
 ];
 
 const Services = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Header animation
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, x: -50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+          },
+        }
+      );
+
+      // Cards stagger animation
+      gsap.fromTo(
+        ".service-card",
+        { opacity: 0, y: 80, rotateY: -15 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateY: 0,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 75%",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="services" className="py-32 px-6 md:px-12 lg:px-24 bg-card">
+    <section ref={sectionRef} id="services" className="py-32 px-6 md:px-12 lg:px-24 bg-card">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-20">
+        <div ref={headerRef} className="mb-20">
           <h2 className="display-lg text-foreground mb-4">Services</h2>
           <div className="w-16 h-px bg-primary" />
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" style={{ perspective: "1000px" }}>
+          {services.map((service) => (
             <div
               key={service.title}
-              className="group relative p-8 border border-border bg-background transition-all duration-500 hover:border-primary/50"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="service-card group relative p-8 border border-border bg-background transition-all duration-500 hover:border-primary/50"
+              style={{ transformStyle: "preserve-3d" }}
             >
               {/* Hover Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
