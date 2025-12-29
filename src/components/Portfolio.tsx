@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,24 +14,25 @@ interface Project {
   year: string;
   image: string;
   size: "large" | "medium" | "small";
+  link: string;
 }
 
 const projects: Project[] = [
-  { id: 1, title: "Noir Identity", category: "logo", year: "2024", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80", size: "large" },
-  { id: 2, title: "Urban Collection", category: "apparel", year: "2024", image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80", size: "medium" },
-  { id: 3, title: "Minimal Brand", category: "logo", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80", size: "small" },
-  { id: 4, title: "Festival Poster", category: "poster", year: "2024", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80", size: "medium" },
-  { id: 5, title: "Product Showcase", category: "mockup", year: "2024", image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80", size: "large" },
-  { id: 6, title: "Event Banner", category: "banner", year: "2023", image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80", size: "small" },
+  { id: 1, title: "Noir Identity", category: "logo", year: "2024", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80", size: "large", link: "/logo-design" },
+  { id: 2, title: "Urban Collection", category: "apparel", year: "2024", image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80", size: "medium", link: "/apparel" },
+  { id: 3, title: "Minimal Brand", category: "logo", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80", size: "small", link: "/logo-design" },
+  { id: 4, title: "Festival Poster", category: "poster", year: "2024", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80", size: "medium", link: "/posters" },
+  { id: 5, title: "Product Showcase", category: "mockup", year: "2024", image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80", size: "large", link: "/mockups" },
+  { id: 6, title: "Event Banner", category: "banner", year: "2023", image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80", size: "small", link: "/banners" },
 ];
 
-const categories: { value: Category; label: string }[] = [
-  { value: "all", label: "All Works" },
-  { value: "logo", label: "Logo Design" },
-  { value: "apparel", label: "Apparel" },
-  { value: "mockup", label: "Mockups" },
-  { value: "poster", label: "Posters" },
-  { value: "banner", label: "Banners" },
+const categories: { value: Category; label: string; link: string }[] = [
+  { value: "all", label: "All Works", link: "" },
+  { value: "logo", label: "Logo Design", link: "/logo-design" },
+  { value: "apparel", label: "Apparel", link: "/apparel" },
+  { value: "mockup", label: "Mockups", link: "/mockups" },
+  { value: "poster", label: "Posters", link: "/posters" },
+  { value: "banner", label: "Banners", link: "/banners" },
 ];
 
 const Portfolio = () => {
@@ -120,7 +122,8 @@ const Portfolio = () => {
       {/* Grid */}
       <div ref={gridRef} className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProjects.map((project) => (
-          <div
+          <Link
+            to={project.link}
             key={project.id}
             className={`portfolio-item relative overflow-hidden cursor-pointer group ${
               project.size === "large" ? "md:col-span-2 md:row-span-2" : ""
@@ -168,7 +171,20 @@ const Portfolio = () => {
                 View
               </span>
             </div>
-          </div>
+          </Link>
+        ))}
+      </div>
+      
+      {/* View All Links */}
+      <div className="max-w-7xl mx-auto mt-12 flex flex-wrap justify-center gap-4">
+        {categories.filter(c => c.value !== "all").map((cat) => (
+          <Link
+            key={cat.value}
+            to={cat.link}
+            className="px-6 py-3 text-xs tracking-[0.2em] uppercase font-body border border-border text-muted-foreground hover:border-primary hover:text-primary transition-all duration-300"
+          >
+            View All {cat.label}
+          </Link>
         ))}
       </div>
     </section>

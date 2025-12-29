@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Palette, Shirt, Box, FileImage } from "lucide-react";
+import { Palette, Shirt, Box, FileImage, Image } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,21 +11,31 @@ const services = [
     icon: Palette,
     title: "Logo Design",
     description: "Bold identities that define brands",
+    link: "/logo-design",
   },
   {
     icon: Shirt,
     title: "Apparel Design",
     description: "DTF, screen print, embroidery",
+    link: "/apparel",
   },
   {
     icon: Box,
-    title: "Mockup Building",
+    title: "Mockups",
     description: "Photorealistic product visualization",
+    link: "/mockups",
   },
   {
     icon: FileImage,
-    title: "Poster & Banner",
+    title: "Posters",
     description: "Event graphics that command attention",
+    link: "/posters",
+  },
+  {
+    icon: Image,
+    title: "Banners",
+    description: "Trade show & event displays",
+    link: "/banners",
   },
 ];
 
@@ -83,9 +94,10 @@ const Services = () => {
         </div>
 
         {/* Grid */}
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" style={{ perspective: "1000px" }}>
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6" style={{ perspective: "1000px" }}>
           {services.map((service) => (
-            <div
+            <Link
+              to={service.link}
               key={service.title}
               className="service-card group relative p-8 border border-border bg-background transition-all duration-500 hover:border-primary/50"
               style={{ transformStyle: "preserve-3d" }}
@@ -103,7 +115,7 @@ const Services = () => {
 
               {/* Content */}
               <div className="relative">
-                <h3 className="font-display text-2xl text-foreground tracking-wide mb-2">
+                <h3 className="font-display text-xl text-foreground tracking-wide mb-2">
                   {service.title}
                 </h3>
                 <p className="text-sm text-muted-foreground font-body font-light">
@@ -116,7 +128,7 @@ const Services = () => {
                 <div className="absolute bottom-0 right-0 w-px h-0 bg-primary group-hover:h-full transition-all duration-500" />
                 <div className="absolute bottom-0 right-0 h-px w-0 bg-primary group-hover:w-full transition-all duration-500 delay-100" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
