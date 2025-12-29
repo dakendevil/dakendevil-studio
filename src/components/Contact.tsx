@@ -23,6 +23,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    whatsapp: "",
     message: "",
   });
 
@@ -73,6 +74,7 @@ const Contact = () => {
         {
           from_name: formData.name,
           from_email: formData.email,
+          whatsapp_number: formData.whatsapp,
           message: formData.message,
         },
         EMAILJS_PUBLIC_KEY
@@ -82,7 +84,7 @@ const Contact = () => {
         title: "Message sent",
         description: "We'll get back to you within 24 hours.",
       });
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", whatsapp: "", message: "" });
     } catch (error) {
       toast({
         title: "Error",
@@ -150,6 +152,15 @@ const Contact = () => {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary h-14 px-4 font-body"
                 required
+              />
+            </div>
+            <div>
+              <Input
+                type="tel"
+                placeholder="WhatsApp Number (Optional)"
+                value={formData.whatsapp}
+                onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary h-14 px-4 font-body"
               />
             </div>
             <div>
