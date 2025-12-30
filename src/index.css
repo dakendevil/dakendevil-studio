@@ -61,9 +61,20 @@
     @apply border-border;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
+    cursor: none;
+  }
+  
+  @media (max-width: 1024px) {
+    body {
+      cursor: auto;
+    }
   }
   
   h1, h2, h3, h4, h5, h6 {
