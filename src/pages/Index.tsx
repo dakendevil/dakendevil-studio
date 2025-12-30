@@ -9,6 +9,8 @@ import Services from "@/components/Services";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
+import SectionDivider from "@/components/SectionDivider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,16 +46,23 @@ const Index = () => {
         <link rel="canonical" href="https://dakendevil.com" />
       </Helmet>
 
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       {/* Grain Overlay */}
       <div className="grain-overlay" />
 
       <Navigation />
       
-      <main ref={mainRef}>
+      <main ref={mainRef} className="scroll-smooth">
         <Hero />
+        <SectionDivider variant="line" />
         <Portfolio />
+        <SectionDivider variant="gradient" />
         <Services />
+        <SectionDivider variant="frame" />
         <About />
+        <SectionDivider variant="gradient" />
         <Contact />
       </main>
 
