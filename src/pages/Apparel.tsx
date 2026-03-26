@@ -54,6 +54,9 @@ const projects = [
   { id: 18, title: "Believe in Luke", year: "2024", image: believeInLuke },
   { id: 19, title: "Alien Blues", year: "2024", image: alienBlues },
   { id: 20, title: "WWYN Collection", year: "2024", image: wwyn },
+  { id: 21, title: "Moon Hoodie", year: "2024", image: moonHoodie },
+  { id: 22, title: "Moonlight Phases", year: "2024", image: moonlightHoodie },
+  { id: 23, title: "Bad Boy Hoodie", year: "2024", image: badBoyHoodie },
 ];
 
 const Apparel = () => {
