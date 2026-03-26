@@ -7,15 +7,30 @@ import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
+import zeusMode from "@/assets/apparel/zeus-mode.png";
+import divine from "@/assets/apparel/divine.png";
+import fearOfGod from "@/assets/apparel/fear-of-god.png";
+import isaiah from "@/assets/apparel/isaiah.png";
+import cathedral from "@/assets/apparel/cathedral.png";
+import rapha from "@/assets/apparel/rapha.png";
+import fruitOfSpirit from "@/assets/apparel/fruit-of-spirit.png";
+import chosenVessel from "@/assets/apparel/chosen-vessel.png";
+import wdc from "@/assets/apparel/wdc.png";
+import strangerThingsHoodie from "@/assets/apparel/stranger-things-hoodie.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { id: 1, title: "Urban Collection", year: "2024", image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80" },
-  { id: 2, title: "Streetwear Drop", year: "2024", image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80" },
-  { id: 3, title: "Limited Tee", year: "2023", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80" },
-  { id: 4, title: "Embroidered Hoodie", year: "2024", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80" },
-  { id: 5, title: "DTF Collection", year: "2023", image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80" },
-  { id: 6, title: "Screen Print Series", year: "2024", image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80" },
+  { id: 1, title: "Zeus Mode Tee", year: "2024", image: zeusMode },
+  { id: 2, title: "Divine Collection", year: "2024", image: divine },
+  { id: 3, title: "Fear of God Tee", year: "2024", image: fearOfGod },
+  { id: 4, title: "Isaiah 14:27", year: "2024", image: isaiah },
+  { id: 5, title: "Cathedral Collection", year: "2024", image: cathedral },
+  { id: 6, title: "Rapha Healer", year: "2024", image: rapha },
+  { id: 7, title: "Fruit of the Spirit", year: "2024", image: fruitOfSpirit },
+  { id: 8, title: "Chosen Vessel", year: "2024", image: chosenVessel },
+  { id: 9, title: "WDC Collection", year: "2024", image: wdc },
+  { id: 10, title: "Stranger Things Hoodie", year: "2024", image: strangerThingsHoodie },
 ];
 
 const Apparel = () => {
