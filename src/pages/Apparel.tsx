@@ -17,6 +17,16 @@ import fruitOfSpirit from "@/assets/apparel/fruit-of-spirit.png";
 import chosenVessel from "@/assets/apparel/chosen-vessel.png";
 import wdc from "@/assets/apparel/wdc.png";
 import strangerThingsHoodie from "@/assets/apparel/stranger-things-hoodie.png";
+import strangerThingsBack from "@/assets/apparel/stranger-things-back.png";
+import tribalFire from "@/assets/apparel/tribal-fire.png";
+import celestialWings from "@/assets/apparel/celestial-wings.png";
+import faithBeige from "@/assets/apparel/faith-beige.png";
+import strangerThingsFront from "@/assets/apparel/stranger-things-front.png";
+import karanAujlaBack from "@/assets/apparel/karan-aujla-back.png";
+import karanAujlaFront from "@/assets/apparel/karan-aujla-front.png";
+import believeInLuke from "@/assets/apparel/believe-in-luke.png";
+import alienBlues from "@/assets/apparel/alien-blues.png";
+import wwyn from "@/assets/apparel/wwyn.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +41,16 @@ const projects = [
   { id: 8, title: "Chosen Vessel", year: "2024", image: chosenVessel },
   { id: 9, title: "WDC Collection", year: "2024", image: wdc },
   { id: 10, title: "Stranger Things Hoodie", year: "2024", image: strangerThingsHoodie },
+  { id: 11, title: "Stranger Things Back", year: "2024", image: strangerThingsBack },
+  { id: 12, title: "Tribal Fire Tee", year: "2024", image: tribalFire },
+  { id: 13, title: "Celestial Wings", year: "2024", image: celestialWings },
+  { id: 14, title: "Faith Collection", year: "2024", image: faithBeige },
+  { id: 15, title: "Stranger Things Front", year: "2024", image: strangerThingsFront },
+  { id: 16, title: "Karan Aujla Hoodie Back", year: "2024", image: karanAujlaBack },
+  { id: 17, title: "Karan Aujla Hoodie Front", year: "2024", image: karanAujlaFront },
+  { id: 18, title: "Believe in Luke", year: "2024", image: believeInLuke },
+  { id: 19, title: "Alien Blues", year: "2024", image: alienBlues },
+  { id: 20, title: "WWYN Collection", year: "2024", image: wwyn },
 ];
 
 const Apparel = () => {
