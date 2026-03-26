@@ -27,6 +27,9 @@ import karanAujlaFront from "@/assets/apparel/karan-aujla-front.png";
 import believeInLuke from "@/assets/apparel/believe-in-luke.png";
 import alienBlues from "@/assets/apparel/alien-blues.png";
 import wwyn from "@/assets/apparel/wwyn.png";
+import moonHoodie from "@/assets/apparel/moon-hoodie.jpg";
+import moonlightHoodie from "@/assets/apparel/moonlight-hoodie.jpg";
+import badBoyHoodie from "@/assets/apparel/bad-boy-hoodie.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
