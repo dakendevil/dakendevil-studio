@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import chosenVessel from "@/assets/apparel/chosen-vessel.png";
-import sykoLogo from "@/assets/logos/syko.png";
+import flexAndVibe from "@/assets/logos/flex-and-vibe.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
