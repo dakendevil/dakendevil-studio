@@ -6,16 +6,30 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import posterPromise from "@/assets/posters/poster-promise.png";
+import posterFaith from "@/assets/posters/poster-faith.png";
+import posterMessiah from "@/assets/posters/poster-messiah.png";
+import posterCV from "@/assets/posters/poster-cv.png";
+import posterWinds from "@/assets/posters/poster-winds.png";
+import posterLuke from "@/assets/posters/poster-luke.png";
+import posterCreation from "@/assets/posters/poster-creation.png";
+import posterEssential from "@/assets/posters/poster-essential.png";
+import posterComingsoon from "@/assets/posters/poster-comingsoon.png";
+import posterMKFashion from "@/assets/posters/poster-mkfashion.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { id: 1, title: "Festival Poster", year: "2024", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80" },
-  { id: 2, title: "Concert Series", year: "2024", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" },
-  { id: 3, title: "Art Exhibition", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80" },
-  { id: 4, title: "Movie Poster", year: "2024", image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80" },
-  { id: 5, title: "Event Promo", year: "2023", image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80" },
-  { id: 6, title: "Brand Campaign", year: "2024", image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80" },
+  { id: 1, title: "Promise - Isaiah", year: "2024", image: posterPromise },
+  { id: 2, title: "Faith Collection", year: "2024", image: posterFaith },
+  { id: 3, title: "Messiah Premium", year: "2024", image: posterMessiah },
+  { id: 4, title: "Chosen Vessel Luxury", year: "2024", image: posterCV },
+  { id: 5, title: "Winds & Sea", year: "2024", image: posterWinds },
+  { id: 6, title: "Believe In Luke", year: "2024", image: posterLuke },
+  { id: 7, title: "Creation - Colossians", year: "2024", image: posterCreation },
+  { id: 8, title: "Essential Wear", year: "2024", image: posterEssential },
+  { id: 9, title: "TechBaithak Coming Soon", year: "2024", image: posterComingsoon },
+  { id: 10, title: "MK Fashion Banner", year: "2024", image: posterMKFashion },
 ];
 
 const Posters = () => {
@@ -85,12 +99,12 @@ const Posters = () => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="project-item group relative aspect-[3/4] overflow-hidden cursor-pointer"
+                className="project-item group relative overflow-hidden cursor-pointer"
               >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">

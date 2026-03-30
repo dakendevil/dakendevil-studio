@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import chosenVessel from "@/assets/apparel/chosen-vessel.png";
 import flexAndVibe from "@/assets/logos/flex-and-vibe.jpeg";
+import posterPromise from "@/assets/posters/poster-promise.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,13 +18,14 @@ interface Project {
   image: string;
   size: "large" | "medium" | "small";
   link: string;
+  aspectRatio?: string;
 }
 
 const projects: Project[] = [
   { id: 1, title: "Flex And Vibe", category: "logo", year: "2024", image: flexAndVibe, size: "large", link: "/logo-design" },
-  { id: 2, title: "Chosen Vessel", category: "apparel", year: "2024", image: chosenVessel, size: "medium", link: "/apparel" },
+  { id: 2, title: "Chosen Vessel", category: "apparel", year: "2024", image: chosenVessel, size: "medium", link: "/apparel", aspectRatio: "16/9" },
   { id: 3, title: "Minimal Brand", category: "logo", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80", size: "small", link: "/logo-design" },
-  { id: 4, title: "Festival Poster", category: "poster", year: "2024", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80", size: "medium", link: "/posters" },
+  { id: 4, title: "Promise - Isaiah", category: "poster", year: "2024", image: posterPromise, size: "medium", link: "/posters" },
   { id: 5, title: "Product Showcase", category: "mockup", year: "2024", image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80", size: "large", link: "/mockups" },
   { id: 6, title: "Event Banner", category: "banner", year: "2023", image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80", size: "small", link: "/banners" },
 ];
@@ -50,7 +52,6 @@ const Portfolio = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Header animation
       gsap.fromTo(
         headerRef.current,
         { opacity: 0, y: 50 },
@@ -66,7 +67,6 @@ const Portfolio = () => {
         }
       );
 
-      // Grid items stagger animation
       gsap.fromTo(
         ".portfolio-item",
         { opacity: 0, y: 60, scale: 0.95 },
@@ -88,7 +88,6 @@ const Portfolio = () => {
     return () => ctx.revert();
   }, []);
 
-  // Animate filter change
   useEffect(() => {
     gsap.fromTo(
       ".portfolio-item",
@@ -131,7 +130,8 @@ const Portfolio = () => {
               project.size === "large" ? "md:col-span-2 md:row-span-2" : ""
             } ${project.size === "medium" ? "md:row-span-2" : ""}`}
             style={{ 
-              minHeight: project.size === "large" ? "500px" : project.size === "medium" ? "400px" : "250px"
+              minHeight: project.size === "large" ? "500px" : project.size === "medium" ? "400px" : "250px",
+              aspectRatio: project.aspectRatio || undefined,
             }}
             onMouseEnter={() => setHoveredId(project.id)}
             onMouseLeave={() => setHoveredId(null)}
@@ -141,7 +141,9 @@ const Portfolio = () => {
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                className={`w-full h-full transition-transform duration-700 ease-out-expo group-hover:scale-105 ${
+                  project.aspectRatio ? "object-contain bg-background" : "object-cover"
+                }`}
               />
             </div>
 
