@@ -20,7 +20,7 @@ interface Project {
 }
 
 const projects: Project[] = [
-  { id: 1, title: "Syko", category: "logo", year: "2024", image: sykoLogo, size: "large", link: "/logo-design" },
+  { id: 1, title: "Flex And Vibe", category: "logo", year: "2024", image: flexAndVibe, size: "large", link: "/logo-design" },
   { id: 2, title: "Chosen Vessel", category: "apparel", year: "2024", image: chosenVessel, size: "medium", link: "/apparel" },
   { id: 3, title: "Minimal Brand", category: "logo", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80", size: "small", link: "/logo-design" },
   { id: 4, title: "Festival Poster", category: "poster", year: "2024", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80", size: "medium", link: "/posters" },
