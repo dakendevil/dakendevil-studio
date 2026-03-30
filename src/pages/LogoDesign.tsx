@@ -14,8 +14,8 @@ import wwynLogo from "@/assets/logos/wwyn-logo.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { id: 1, title: "Syko", year: "2024", image: sykoLogo },
-  { id: 2, title: "Flex And Vibe", year: "2024", image: flexAndVibe },
+  { id: 1, title: "Flex And Vibe", year: "2024", image: flexAndVibe },
+  { id: 2, title: "Syko", year: "2024", image: sykoLogo },
   { id: 3, title: "TwikBit", year: "2024", image: twikbit },
   { id: 4, title: "WWYN", year: "2024", image: wwynLogo },
 ];
