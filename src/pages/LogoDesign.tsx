@@ -6,16 +6,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import sykoLogo from "@/assets/logos/syko.png";
+import flexAndVibe from "@/assets/logos/flex-and-vibe.jpeg";
+import twikbit from "@/assets/logos/twikbit.jpeg";
+import wwynLogo from "@/assets/logos/wwyn-logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { id: 1, title: "Noir Identity", year: "2024", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" },
-  { id: 2, title: "Minimal Brand", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80" },
-  { id: 3, title: "Bold Emblem", year: "2024", image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80" },
-  { id: 4, title: "Geometric Mark", year: "2023", image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80" },
-  { id: 5, title: "Elegant Script", year: "2024", image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80" },
-  { id: 6, title: "Tech Symbol", year: "2023", image: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&q=80" },
+  { id: 1, title: "Syko", year: "2024", image: sykoLogo },
+  { id: 2, title: "Flex And Vibe", year: "2024", image: flexAndVibe },
+  { id: 3, title: "TwikBit", year: "2024", image: twikbit },
+  { id: 4, title: "WWYN", year: "2024", image: wwynLogo },
 ];
 
 const LogoDesign = () => {
