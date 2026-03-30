@@ -23,7 +23,7 @@ interface Project {
 
 const projects: Project[] = [
   { id: 1, title: "Flex And Vibe", category: "logo", year: "2024", image: flexAndVibe, size: "large", link: "/logo-design" },
-  { id: 2, title: "Chosen Vessel", category: "apparel", year: "2024", image: chosenVessel, size: "medium", link: "/apparel", aspectRatio: "16/9" },
+  { id: 2, title: "Chosen Vessel", category: "apparel", year: "2024", image: chosenVessel, size: "small", link: "/apparel" },
   { id: 3, title: "Minimal Brand", category: "logo", year: "2023", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80", size: "small", link: "/logo-design" },
   { id: 4, title: "Promise - Isaiah", category: "poster", year: "2024", image: posterPromise, size: "medium", link: "/posters" },
   { id: 5, title: "Product Showcase", category: "mockup", year: "2024", image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&q=80", size: "large", link: "/mockups" },
@@ -97,7 +97,7 @@ const Portfolio = () => {
   }, [activeFilter]);
 
   return (
-    <section ref={sectionRef} id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background">
+    <section ref={sectionRef} id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background overflow-hidden">
       {/* Section Header */}
       <div ref={headerRef} className="max-w-7xl mx-auto mb-16">
         <h2 className="display-lg text-foreground mb-8">Selected Works</h2>
