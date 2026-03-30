@@ -97,7 +97,7 @@ const Portfolio = () => {
   }, [activeFilter]);
 
   return (
-    <section ref={sectionRef} id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background">
+    <section ref={sectionRef} id="works" className="py-32 px-6 md:px-12 lg:px-24 bg-background overflow-hidden">
       {/* Section Header */}
       <div ref={headerRef} className="max-w-7xl mx-auto mb-16">
         <h2 className="display-lg text-foreground mb-8">Selected Works</h2>
